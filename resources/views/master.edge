@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>App | Contacts </title>
+	{{ style('css/bootstrap.css') }}
+	{{ style('fonts/glyphicons-halflings-regular.woff2') }}
+	{{ style('css/sticky-footer-navbar.css') }}
+	{{ style('css/bootstrap-select.min.css') }}
+</head>
+<body>
+
+	<div class="container">
+
+		@!component('navbar')
+
+		<div class="row">
+			<div class="col-xs-12">
+			<h1 class="page-header text-center">Adonis JS Framework -- Bienvenido, {{ name }}</h1>
+				@loggedIn
+				  <form action="{{ route('logout') }}" method="POST" class="form-signin">       
+					{{ csrfField() }}       
+						   
+					<button class="btn btn-primary pull-right" title="Logout">       
+						  <span class="glyphicon glyphicon-remove">Salir</span>        
+						</button>       
+				  </form> 				
+				@else					
+					<a href="{{ route('login.create') }}" class="btn btn-primary pull-right" role="button">       
+						<span class="glyphicon glyphicon-plus"></span> Login       
+					</a>					
+				@endloggedIn  
+				
+			</div>
+    
+			@!section('content')
+			
+		</div>
+	</div>	
+
+	@!component('footer')
+
+	{{ script('js/jquery.js')	 }}
+	{{ script('js/bootstrap.js') }}
+	{{ script('js/bootstrap-select.min.js') }}
+</body>
+</html>

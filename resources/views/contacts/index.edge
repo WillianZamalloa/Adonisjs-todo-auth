@@ -1,0 +1,56 @@
+@layout('master')       
+       
+@section('content')	       
+	       
+	<div class="col-sm-8">       
+		<h2>       
+			Lista de Contactos       
+			<a href="{{ route('contacts.create') }}" class="btn btn-primary pull-right" role="button">       
+				<span class="glyphicon glyphicon-plus"></span> Nuevo       
+			</a>        
+		</h2>       
+       
+		@include('component.info')    
+       
+		<table class="table table-hover table-striped">       
+			<thead>       
+				<tr>       
+					<th width="20px">ID</th>       
+					<th>Nombre</th>       
+					<th>Telefono</th>       
+					<th colspan="3">&nbsp;</th>       
+				</tr>       
+			</thead>       
+			<tbody>       
+				@each(contact in contacts)       
+					<tr>       
+						<td>{{ contact.id }}</td>       
+						<td>{{ contact.nombre }}</td>       
+						<td>{{ contact.telefono }}</td>       
+						<td>       
+							<a href="{{ route('contacts.show', { id: contact.id } ) }}" title="Ver" class="btn btn-link">       
+								<span class="glyphicon glyphicon-eye-open"></span>       
+							</a>       
+						</td>       
+						<td>       
+							<a href="{{ route('contacts.edit', { id: contact.id }) }}" title="Editar" class="btn btn-link">       
+								<span class="glyphicon glyphicon-edit"></span>       
+							</a>       
+						</td>       
+						<td>       
+							<form action="{{ route('contacts.destroy', { id: contact.id } ) + '?_method=DELETE' }}" method="POST" >       
+								{{ csrfField() }}       
+								       
+								<button class="btn btn-link" title="Eliminar">       
+						          <span class="glyphicon glyphicon-remove"></span>        
+						        </button>       
+							</form>       
+						</td>       
+					</tr>       
+				@endeach       
+			</tbody>       
+		</table>       
+		      
+	</div>       
+	       
+@endsection       
